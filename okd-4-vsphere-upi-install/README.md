@@ -28,9 +28,9 @@ configureOKDInstallerEnvironment.sh $(pwd)
 ``` console
 ./prerun.sh
 ```
-1. Launch the buildCluster script, which will clone the .ova template to create the desired number of nodes, installing the proper ignition data on each.
+1. Launch the buildCluster script, which will clone the .ova template to create the desired number of nodes, installing the proper ignition data on each node.
 ``` console
- node. buildCluster.sh
+buildCluster.sh
 ```
 1. Launch a sub-terminal with tmux or screen.
 ``` console
