@@ -17,7 +17,10 @@ This receipe walks you through the process of installing OKD 4 on vSphere with U
 	ssh-keygen -t rsa -b 4096 -N '' \
     		-f <path>/<file_name>
 	```
-1. eval "$(ssh-agent -s)"; ssh-add <path>/<file_name>
+1. Add the key to your ssh agent
+	``` console
+	eval "$(ssh-agent -s)"; ssh-add <path>/<file_name>
+	```
 1. Run the environment configuration script, which downloads the OpenShift installer, the oc and kubectl command line tools, and the appropriate Fedora Core OS .ova.
 	``` console
 	configureOKDInstallerEnvironment.sh $(pwd)
