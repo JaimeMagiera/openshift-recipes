@@ -4,7 +4,7 @@ This receipe walks you through the process of installing OKD 4 on vSphere with U
 
 ## Prerequisites:
 1. An account on vSphere with read/write access rights on datastores and vm networking
-1. A deployment machine connected to the WAN. This machine will run the scripts, connecting to vSphere.
+1. A deployment machine connected to the WAN. This machine will run the scripts, connecting to vSphere. Be sure to install the screen or tmux terminal multiplexers, as the OpenShift installation process can take some time.
 1. Functioning, configurable DNS service
 1. Functioning, configurable DHCP service
 
@@ -12,7 +12,7 @@ This receipe walks you through the process of installing OKD 4 on vSphere with U
 
 1. [Install govc](https://github.com/vmware/govmomi/tree/master/govc) on your deployment controller machine. 
 1. Clone the [OCT](https://github.com/JaimeMagiera/oct) repository to your deployment machine.
-1. Run the environment configuration script, which downloads the OpenShift installer, the oc and kubectl command line tools, the appropriate Fedora Core OS .ova. 
+1. Run the environment configuration script, which downloads the OpenShift installer, the oc and kubectl command line tools, and the appropriate Fedora Core OS .ova. 
 ``` console
 configureOKDInstallerEnvironment.sh $(pwd)
 ```
@@ -23,7 +23,13 @@ configureOKDInstallerEnvironment.sh $(pwd)
 1. buildSpiritus.sh
 1. setMAC-Spiritus.sh
 1. manageClusterPower.sh -c spiritus 
-1. tmux  new -s okd
-1. bin/openshift-install --dir=$(pwd) wait-for bootstrap-complete  --log-level=info
-oc get csr -o go-template='{{range .items}}{{if not .status}}{{.metadata.name}} {{"\n"}}{{end}}{{end}}' | xargs oc adm certificate approve
+1. Launch a sub-terminal with tmux or screen.
+``` console
+tmux  new -s okd
+```
+1. Run the OpenShift installer, pointing to your current directory for the configuration. 
+``` console
+bin/openshift-install --dir=$(pwd) wait-for bootstrap-complete  --log-level=info
+```
+1. oc get csr -o go-template='{{range .items}}{{if not .status}}{{.metadata.name}} {{"\n"}}{{end}}{{end}}' | xargs oc adm certificate approve
 
