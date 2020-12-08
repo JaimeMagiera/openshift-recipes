@@ -1,6 +1,6 @@
 # Installing OKD 4 on vSphere with User Provisioned Infrastructure
 
-This receipe walks you through the process of installing OKD 4 on vSphere with User Provisioned Infrastructure with the help of scripts from the [OCT](https://github.com/JaimeMagiera/oct) repository. For a more detailed understanding of the OKD installation process, please see the [OKD documentation](https://docs.okd.io/latest/installing/installing_vsphere/installing-vsphere.html).
+This recipe walks you through the process of installing OKD 4 on vSphere with User Provisioned Infrastructure with the help of scripts from the [OCT](https://github.com/JaimeMagiera/oct) repository. For a more detailed understanding of the OKD installation process, please see the [OKD documentation](https://docs.okd.io/latest/installing/installing_vsphere/installing-vsphere.html).
 
 ## Prerequisites:
 1. An account on vSphere with read/write access rights on datastores and vm networking
