@@ -25,8 +25,10 @@ This receipe walks you through the process of installing OKD 4 on vSphere with U
 	``` console
 	configureOKDInstallerEnvironment.sh $(pwd)
 	``` 
-1. uploadImageToVSphere.sh -f fedora-coreos-32.20200907.3.0-vmware.x86_64.ova -d "VMStor2-01" -n fedora-coreos-32.20200907.3.0-vmware.x86_64
-1. eval "$(ssh-agent -s)"; ssh-add ~/.ssh/coreadmin_rsa
+1. Upload the .ova to desired datastore on your vSphere cluster.
+	``` console
+	uploadImageToVSphere.sh -f fedora-coreos-32.20200907.3.0-vmware.x86_64.ova -d "VMStor2-01" -n fedora-coreos-32.20200907.3.0-vmware.x86_64
+	```
 1. Run the prerun script to configure the manifests and insert your pullsecret into the install-config.yaml. 
 	``` console
 	./prerun.sh
