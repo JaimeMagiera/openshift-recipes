@@ -24,11 +24,14 @@ configureOKDInstallerEnvironment.sh $(pwd)
 ``` 
 1. uploadImageToVSphere.sh -f fedora-coreos-32.20200907.3.0-vmware.x86_64.ova -d "VMStor2-01" -n fedora-coreos-32.20200907.3.0-vmware.x86_64
 1. eval "$(ssh-agent -s)"; ssh-add ~/.ssh/coreadmin_rsa
-1. vi install-config.yml add pullSecret
-1. prerun.sh
-1. buildSpiritus.sh
-1. setMAC-Spiritus.sh
-1. manageClusterPower.sh -c spiritus 
+1. Run the prerun script to configure the manifests and insert your pullsecret into the install-config.yaml. 
+``` console
+./prerun.sh
+```
+1. Launch the buildCluster script, which will clone the .ova template to create the desired number of nodes, installing the proper ignition data on each.
+``` console
+ node. buildCluster.sh
+```
 1. Launch a sub-terminal with tmux or screen.
 ``` console
 tmux  new -s okd
@@ -37,5 +40,7 @@ tmux  new -s okd
 ``` console
 bin/openshift-install --dir=$(pwd) wait-for bootstrap-complete  --log-level=info
 ```
-1. oc get csr -o go-template='{{range .items}}{{if not .status}}{{.metadata.name}} {{"\n"}}{{end}}{{end}}' | xargs oc adm certificate approve
+
+## Post-Installation 
+oc get csr -o go-template='{{range .items}}{{if not .status}}{{.metadata.name}} {{"\n"}}{{end}}{{end}}' | xargs oc adm certificate approve
 
