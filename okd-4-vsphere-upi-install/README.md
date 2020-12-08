@@ -12,15 +12,16 @@ This receipe walks you through the process of installing OKD 4 on vSphere with U
 
 1. [Install govc](https://github.com/vmware/govmomi/tree/master/govc) on your deployment controller machine. 
 1. Clone the [OCT](https://github.com/JaimeMagiera/oct) repository to your deployment machine.
-1. Run the environment configuration script, which downloads the OpenShift installer, the oc and kubectl command line tools, and the appropriate Fedora Core OS .ova. 
-``` console
-configureOKDInstallerEnvironment.sh $(pwd)
-```
 1. Generate an SSH key which will be used for the communication between the installer and the nodes.
 ``` console
 ssh-keygen -t rsa -b 4096 -N '' \
     -f <path>/<file_name>
 ```
+1. eval "$(ssh-agent -s)"; ssh-add <path>/<file_name>
+1. Run the environment configuration script, which downloads the OpenShift installer, the oc and kubectl command line tools, and the appropriate Fedora Core OS .ova.
+``` console
+configureOKDInstallerEnvironment.sh $(pwd)
+``` 
 1. uploadImageToVSphere.sh -f fedora-coreos-32.20200907.3.0-vmware.x86_64.ova -d "VMStor2-01" -n fedora-coreos-32.20200907.3.0-vmware.x86_64
 1. eval "$(ssh-agent -s)"; ssh-add ~/.ssh/coreadmin_rsa
 1. vi install-config.yml add pullSecret
